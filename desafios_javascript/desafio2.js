@@ -1,7 +1,7 @@
 // Desafio 2 — Estatísticas de notas
 // Calcula quantidade de aprovados, média da turma e maior nota.
 
-function estatisticasNotas(notas) {
+/**  function estatisticasNotas(notas) {
   let soma = 0;
   let aprovados = 0;
   let maior = notas[0];
@@ -27,3 +27,19 @@ function estatisticasNotas(notas) {
 
 const notas = [7, 4, 9, 5, 8];
 estatisticasNotas(notas);
+*/
+
+const estatisticasNotas = (notas) => {
+  const aprovados = notas.filter((nota) => nota >= 6);
+  const soma = notas.reduce((acumulado, nota) => acumulado + nota, 0);
+  const media = soma / notas.length;
+  const maior = notas.reduce((maiorAtual, nota) => (nota > maiorAtual ? nota : maiorAtual), notas[0]);
+
+  console.log(`Aprovados: ${aprovados.length} | Média: ${media.toFixed(1)} | Maior: ${maior}`);
+
+  return { aprovados: aprovados.length, media, maior };
+};
+
+const notas = [7, 4, 9, 5, 8];
+estatisticasNotas(notas); 
+ 
