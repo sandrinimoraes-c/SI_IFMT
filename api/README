@@ -1,0 +1,43 @@
+// Cria uma função assíncrona (async). O "async" avisa que o código vai fazer buscas na internet
+// e precisará esperar (await) pelas respostas sem travar o restante do programa.
+async function buscarDdd(ddd) {
+    try {
+        // Envia um pedido de busca para a API pública do BrasilAPI.
+        // O `${ddd}` insere o número do DDD que você escolheu direto na URL do site.
+        const resposta = await fetch(`https://brasilapi.com.br/api/ddd/v1/${ddd}`);
+
+        // Verifica se a resposta do site deu errado (ex: se o site caiu ou o DDD não existe).
+        if (!resposta.ok) {
+            // Cria um erro de propósito para interromper o código e pular direto para o "catch" abaixo.
+            throw new Error(`DDD inválido ou erro na API (status ${resposta.status})`);
+        }
+
+        // Converte o texto bruto que veio da internet no formato JSON (um objeto que o JS entende).
+        const dados = await resposta.json();
+
+        // Exibe no terminal a sigla do Estado correspondente àquele DDD (ex: PR).
+        console.log(`1. Estado: ${dados.state}`);
+        
+        // Exibe no terminal o total de cidades que pertencem a essa região geográfica.
+        console.log(`2. Quantidade de cidades: ${dados.cities.length}`);
+        
+        // Apenas exibe um título no terminal antes de listar as cidades.
+        console.log("3. Cidades:");
+
+        // Faz um loop (laço de repetição) que passa de cidade em cidade dentro da lista recebida.
+        // O "i" é um contador automático que começa em 0 para enumerar cada linha da lista.
+        dados.cities.forEach((cidade, i) => {
+            // Exibe o número da posição (somado mais 1, para começar em 1 em vez de 0) e o nome da cidade.
+            console.log(`${i + 1}. ${cidade}`);
+        });
+
+    } catch (erro) {
+        // Se qualquer linha dentro do bloco "try" falhar, o código para na hora e vem para cá.
+        // Aqui ele exibe no terminal um aviso em vermelho informando qual foi o erro exato.
+        console.error("Erro ao buscar DDD:", erro.message);
+    }
+}
+
+// Chame a função passando o DDD que deseja testar entre aspas.
+// Ao executar o arquivo no terminal, esta linha iniciará toda a busca explicada acima.
+buscarDdd("44");
