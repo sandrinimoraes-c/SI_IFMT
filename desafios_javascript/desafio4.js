@@ -15,10 +15,8 @@ function ehPrimo(n) {
   return true;
 }
 
-
 console.log(ehPrimo(7)); 
 console.log(ehPrimo(9)); 
-
 
 let primos = [];
 for (let numero = 2; numero <= 50; numero++) {

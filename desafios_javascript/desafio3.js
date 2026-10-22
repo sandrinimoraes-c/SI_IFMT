@@ -1,7 +1,7 @@
 // Desafio 3 — Contador de vogais
 // Devolve quantas vogais existem na palavra recebida.
 
-function contarVogais(palavra) {
+/** function contarVogais(palavra) {
   const vogais = "aeiou";
   let contador = 0;
 
@@ -19,6 +19,24 @@ function contarVogais(palavra) {
 
   return contador;
 }
+
+console.log(contarVogais("programação")); 
+console.log(contarVogais("JavaScript")); 
+*/
+
+
+
+const contarVogais = (palavra) => {
+  const vogais = "aeiouáàâãeéèêiíìîoóòôõuúùû";
+
+  
+  const letras = [...palavra.toLowerCase()];
+
+  const apenasVogais = letras.filter((letra) => vogais.includes(letra));
+
+  return apenasVogais.length;
+};
+
 
 console.log(contarVogais("programação")); 
 console.log(contarVogais("JavaScript")); 
