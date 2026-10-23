@@ -1,13 +1,5 @@
 # ⚡ BSI_IFMT // Central de Codificação Acadêmica
 
-<p align="center">
-  <img src="https://shields.io" />
-  <img src="https://shields.io" />
-  <img src="https://shields.io" />
-</p>
-
----
-
 ## 🛰️ Visão Geral do Sistema
 > **Status:** `OPERACIONAL` 🟢  
 > **Objetivo:** Centralizar o histórico de desenvolvimento, laboratórios de código e arquitetura de software desenvolvidos durante a graduação de **Sistemas de Informação** no Instituto Federal de Mato Grosso.
