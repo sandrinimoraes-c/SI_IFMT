@@ -1,10 +1,8 @@
 # ⚡ BSI_IFMT // Central de Codificação Acadêmica
 
-<p align="center">
-  <img src="https://shields.io" alt="IFMT">
-  <img src="https://shields.io" alt="Sistemas de Informacao">
-  <img src="https://shields.io" alt="Periodo">
-</p>
+![IFMT](https://shields.io)
+![Sistemas de Informação](https://shields.io)
+![Período](https://shields.io)
 
 ---
 
