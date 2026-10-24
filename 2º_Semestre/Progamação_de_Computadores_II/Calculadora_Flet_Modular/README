@@ -1,0 +1,35 @@
+# Calculadora Flet – Modular
+
+Calculadora simples em **Flet**, organizada em **módulos**.
+
+## Estrutura
+```
+calculadora_flet_modular/
+├─ app/
+│  └─ main.py              # ponto de entrada do app
+├─ calc/
+│  ├─ evaluator.py         # safe_eval (AST) e erros
+│  └─ state.py             # estado da calculadora (expressão)
+├─ ui/
+│  ├─ buttons.py           # layout/constantes dos botões
+│  ├─ controller.py        # lógica dos cliques e validação
+│  └─ views.py             # montagem da UI (Page)
+├─ run.py                  # runner (python run.py)
+└─ requirements.txt
+```
+
+## Como rodar
+```bash
+python -m venv .venv
+# Windows: .venv\Scripts\activate
+# Linux/Mac: source .venv/bin/activate
+pip install -r requirements.txt
+python run.py
+```
+
+## Recursos
+- Operações: `+ - * / %`
+- Parênteses e unários `±`
+- `C`, `CE`, `⌫`, `=`
+- Avaliação **segura** via AST (sem `eval`).
+- Fácil de estender (adicione funções no `evaluator.py` e botões em `buttons.py`).
