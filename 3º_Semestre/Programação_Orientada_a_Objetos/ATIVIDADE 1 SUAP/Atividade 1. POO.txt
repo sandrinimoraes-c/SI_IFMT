@@ -1,0 +1,23 @@
+Atividade 1. POO
+
+classe: 
+
+atributos:
+   nome
+   cpf
+   data de nascimento
+   
+
+
+
+Aula 20/02
+
+ex.
+
+Conta Bancária
+
+entender classe scanner
+suitcase
+wile
+duowile
+menu

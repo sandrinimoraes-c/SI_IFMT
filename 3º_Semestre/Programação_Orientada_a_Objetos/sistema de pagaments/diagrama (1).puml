@@ -1,0 +1,103 @@
+@startuml
+
+' =========================
+' CLASSE BASE E HERANÇA
+' =========================
+
+class Pessoa {
+  - nome: String
+  - cpf: String
+  + exibirDados(): void
+}
+
+class Usuario {
+  - matricula: String
+  - emprestimos: List<Emprestimo>
+  + realizarEmprestimo(e: Emprestimo): void
+}
+
+class Bibliotecario {
+  - codigoFuncionario: String
+  + cadastrarLivro(l: Livro): void
+}
+
+Pessoa <|-- Usuario
+Pessoa <|-- Bibliotecario
+
+note right of Pessoa
+Herança:
+Usuario e Bibliotecario
+herdam de Pessoa
+end note
+
+' =========================
+' LIVRO E EXEMPLAR
+' =========================
+
+class Livro {
+  - titulo: String
+  - autor: String
+  - isbn: String
+  - exemplares: List<Exemplar>
+  + adicionarExemplar(e: Exemplar): void
+  + getExemplares(): List<Exemplar>
+}
+
+class Exemplar {
+  - codigo: int
+  - disponivel: boolean
+  + isDisponivel(): boolean
+  + setDisponivel(status: boolean): void
+}
+
+Livro "1" *-- "1..*" Exemplar
+
+note right of Livro
+Composição:
+Exemplar não existe sem Livro.
+Se o Livro for removido,
+os Exemplares deixam de existir.
+end note
+
+' =========================
+' EMPRÉSTIMO
+' =========================
+
+class Emprestimo {
+  - dataEmprestimo: Date
+  - dataDevolucao: Date
+  - usuario: Usuario
+  - exemplar: Exemplar
+  + registrarDevolucao(): void
+}
+
+Usuario "1" -- "0..*" Emprestimo
+Exemplar "1" -- "0..*" Emprestimo
+
+note right of Emprestimo
+Associação:
+Emprestimo relaciona Usuario e Exemplar.
+Ambos existem independentemente.
+end note
+
+' =========================
+' BIBLIOTECA
+' =========================
+
+class Biblioteca {
+  - nome: String
+  - endereco: String
+  - livros: List<Livro>
+  - usuarios: List<Usuario>
+}
+
+Biblioteca "1" o-- "0..*" Livro
+Biblioteca "1" o-- "0..*" Usuario
+
+note right of Biblioteca
+Agregação:
+Biblioteca "possui" Livros e Usuários,
+mas eles podem existir sem ela.
+end note
+
+@enduml

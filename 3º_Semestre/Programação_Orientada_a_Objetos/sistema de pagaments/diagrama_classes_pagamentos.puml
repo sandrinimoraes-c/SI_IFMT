@@ -1,0 +1,49 @@
+@startuml
+
+skinparam classAttributeIconSize 0
+
+class Cliente {
+    - nome: String
+    - cpf: String
+    + apresentar(): void
+}
+
+abstract class Pagamento {
+    - id: int
+    - valor: double
+    - status: String
+    - cliente: Cliente
+    + processarPagamento(): void
+    + exibirResumo(): void
+}
+
+class PagamentoCartao extends Pagamento {
+    - numeroCartao: String
+    - bandeira: String
+    + processarPagamento(): void
+}
+
+class PagamentoPix extends Pagamento {
+    - chavePix: String
+    - bancoOrigem: String
+    + processarPagamento(): void
+}
+
+class PagamentoBoleto extends Pagamento {
+    - codigoBarras: String
+    - dataVencimento: String
+    + processarPagamento(): void
+}
+
+class SistemaPagamentos {
+    - pagamentos: ArrayList<Pagamento>
+    + adicionarPagamento(p: Pagamento): void
+    + processarTodos(): void
+    + listarPagamentos(): void
+}
+
+Cliente "1" -- "0..*" Pagamento : possui
+SistemaPagamentos "1" -- "0..*" Pagamento : gerencia
+Pagamento "1" -- "1" Cliente : pertence_a
+
+@enduml

@@ -1,0 +1,46 @@
+Classe 1: Aluno
+
+É a entidade central do negócio. Sem alunos, a academia não existe.
+
+	
+Nome da Classe	Aluno
+Atributos	
+	1. nome: Essencial para identificação.
+	2. cpf: Identificador único, crucial para o contrato.
+	3. dataNascimento: Necessário para o contrato e, futuramente, para regras de negócio (ex: restrição de idade).
+	4. plano: Define o tipo de acesso e faturamento (ex: Mensal, VIP).
+	5. instrutorResponsavel: Link para o instrutor que acompanha o aluno.
+
+Métodos	
+	1. matricular(plano): Ação que formaliza a entrada do aluno na academia.
+	2. visualizarFichaExercicios(): Permite ao aluno consultar seu treino.
+	3. trocarPlano(novoPlano): Permite ao aluno alterar seu plano de assinatura.
+
+
+Classe 2: Instrutor
+O profissional responsável por guiar os alunos em seus treinos.
+
+	
+Nome da Classe	Instrutor
+Atributos	
+	1. nome: Identificação do profissional.
+	2. cref: Registro profissional, um identificador único e obrigatório para a função.
+	3. especialidade: Define a área de atuação (Musculação, Yoga, etc.), importante para alocar o instrutor correto para o aluno.
+
+Métodos	
+	1. montarFichaExercicios(aluno, exercicios): Principal função do instrutor no sistema.
+	2. adicionarAluno(aluno): Associa um aluno à sua lista de supervisionados.
+
+
+Classe 3: Aparelho
+Representa os equipamentos físicos da academia, que são recursos essenciais para a execução dos treinos.
+
+	
+Nome da Classe	Aparelho
+Atributos	
+	1. codigoPatrimonio: Identificador único para controle de inventário.
+	2. nome: Nome do aparelho (ex: Supino, Leg Press).
+	3. status: Indica se o aparelho está disponivel ou em_manutencao.
+Métodos	
+	1. alterarStatus(novoStatus): Ação de mudar o estado do aparelho (ex: de disponível para em manutenção).
+	2. verificarDisponibilidade(): Retorna se o aparelho pode ser usado.
