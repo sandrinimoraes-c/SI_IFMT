@@ -1,0 +1,144 @@
+/* =========================================================
+   Folha de estilo da Plataforma de Agendamento de Consultas
+   Paleta: tons de azul e cinza, visual limpo e moderno
+   ========================================================= */
+
+.root {
+    -fx-font-family: "Segoe UI", "Arial", sans-serif;
+    -fx-background-color: #F4F6F9;
+}
+
+/* ---------- Abas (TabPane) ---------- */
+.tab-pane .tab-header-area {
+    -fx-padding: 10 10 0 10;
+}
+
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-background-color: #FFFFFF;
+}
+
+.tab {
+    -fx-background-color: #E7ECF3;
+    -fx-background-radius: 8 8 0 0;
+    -fx-padding: 10 22 10 22;
+}
+
+.tab:selected {
+    -fx-background-color: #2F6FED;
+}
+
+.tab .tab-label {
+    -fx-text-fill: #3B4252;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+}
+
+.tab:selected .tab-label {
+    -fx-text-fill: #FFFFFF;
+}
+
+.tab-pane .tab-content-area {
+    -fx-background-color: #F4F6F9;
+}
+
+/* ---------- Títulos ---------- */
+.titulo-secao {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1E2A3A;
+}
+
+.titulo-lista {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #3B4252;
+    -fx-padding: 6 0 0 0;
+}
+
+/* ---------- Cartão do formulário ---------- */
+.cartao-formulario {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 12;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 10, 0, 0, 2);
+}
+
+/* ---------- Labels comuns ---------- */
+.label {
+    -fx-text-fill: #4B5566;
+    -fx-font-size: 13px;
+}
+
+/* ---------- Campos de texto, data e combo ---------- */
+.text-field,
+.combo-box,
+.date-picker {
+    -fx-background-color: #F7F9FC;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-border-color: #D8DEE9;
+    -fx-border-width: 1;
+    -fx-padding: 6 10 6 10;
+    -fx-font-size: 13px;
+    -fx-pref-width: 260px;
+}
+
+.text-field:focused,
+.combo-box:focused,
+.date-picker:focused {
+    -fx-border-color: #2F6FED;
+}
+
+.combo-box .list-cell {
+    -fx-padding: 4 8 4 8;
+}
+
+/* ---------- Botões ---------- */
+.button {
+    -fx-background-radius: 8;
+    -fx-padding: 9 18 9 18;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+
+.botao-primario {
+    -fx-background-color: #2F6FED;
+    -fx-text-fill: white;
+}
+
+.botao-primario:hover {
+    -fx-background-color: #2659C9;
+}
+
+.botao-secundario {
+    -fx-background-color: #E7ECF3;
+    -fx-text-fill: #3B4252;
+}
+
+.botao-secundario:hover {
+    -fx-background-color: #D8DEE9;
+}
+
+/* ---------- Lista (ListView) ---------- */
+.list-view {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 10;
+    -fx-border-color: #E3E8EF;
+    -fx-border-radius: 10;
+    -fx-border-width: 1;
+}
+
+.list-cell {
+    -fx-padding: 8 12 8 12;
+    -fx-font-size: 13px;
+    -fx-text-fill: #2C2C2A;
+}
+
+.list-cell:filled:selected {
+    -fx-background-color: #2F6FED;
+    -fx-text-fill: white;
+}
+
+.list-cell:filled:hover {
+    -fx-background-color: #EEF2FB;
+}

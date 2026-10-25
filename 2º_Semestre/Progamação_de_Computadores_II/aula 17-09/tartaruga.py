@@ -1,0 +1,33 @@
+import turtle 
+
+t = turtle.Turtle()
+t.color("black")
+t.pensize(3)
+
+t.forward(200)
+t.right(90)
+t.forward(200)
+t.right(90)
+t.forward(200)
+t.right(90)
+t.forward(200)
+t.left(90)
+t.forward(200)
+t.right(90)
+t.forward(200)
+t.right(90)
+t.forward(200)
+t.right(90)
+t.forward(200)
+t.right(45)
+t.forward(281)
+t.left(135)
+t.forward(200)
+t.left(180)
+t.right(45)
+t.forward(281)
+t.left(135)
+t.forward(200)
+
+
+turtle.done()

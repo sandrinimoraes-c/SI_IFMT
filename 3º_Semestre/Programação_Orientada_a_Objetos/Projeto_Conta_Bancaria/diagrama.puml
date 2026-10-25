@@ -1,0 +1,30 @@
+@startuml
+
+class Cliente {
+  - nome : String
+  - cpf : String
+  + Cliente(nome : String, cpf : String)
+  + getNome() : String
+  + getCpf() : String
+}
+
+class ContaBancaria {
+  - numeroConta : String
+  - saldo : double
+  - cliente : Cliente
+  + ContaBancaria(numeroConta : String, cliente : Cliente)
+  + depositar(valor : double) : void
+  + sacar(valor : double) : void
+  + mostrarDados() : void
+  + getNumeroConta() : String
+}
+
+class MyApp {
+  + main(args : String[]) : void
+}
+
+ContaBancaria "1" -- "1" Cliente : possui
+MyApp ..> Cliente : cria/usa
+MyApp ..> ContaBancaria : cria/usa
+
+@enduml

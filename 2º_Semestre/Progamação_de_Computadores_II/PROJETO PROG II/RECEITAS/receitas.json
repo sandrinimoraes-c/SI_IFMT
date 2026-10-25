@@ -1,0 +1,53 @@
+[
+    {
+        "nome": "Omelete Simples",
+        "ingredientes": ["ovo", "sal", "oleo"],
+        "dificuldade": "Fácil",
+        "preparo": [
+            "Bata os ovos com uma pitada de sal em um prato fundo.",
+            "Aqueça o óleo na frigideira.",
+            "Despeje os ovos e deixe firmar.",
+            "Vire com cuidado e sirva."
+        ]
+    },
+    {
+        "nome": "Arroz de Forno",
+        "ingredientes": ["arroz", "queijo", "presunto", "tomate"],
+        "dificuldade": "Média",
+        "preparo": [
+            "Misture o arroz cozido com tomate picado e presunto.",
+            "Coloque em uma travessa.",
+            "Cubra com fatias de queijo.",
+            "Leve ao forno por 15 minutos até gratinar."
+        ]
+    },
+    {
+        "nome": "Misto Quente",
+        "ingredientes": ["pao", "queijo", "presunto"],
+        "dificuldade": "Fácil",
+        "preparo": [
+            "Monte o sanduíche com queijo e presunto.",
+            "Coloque na sanduicheira ou frigideira até o queijo derreter."
+        ]
+    },
+    {
+        "nome": "Salada Simples",
+        "ingredientes": ["alface", "tomate", "sal"],
+        "dificuldade": "Fácil",
+        "preparo": [
+            "Lave bem as folhas de alface e o tomate.",
+            "Corte o tomate em rodelas.",
+            "Tempere com sal e sirva fresco."
+        ]
+    },
+    {
+        "nome": "Bolo de Caneca",
+        "ingredientes": ["ovo", "farinha", "acucar", "cacau", "leite"],
+        "dificuldade": "Fácil",
+        "preparo": [
+            "Misture todos os ingredientes secos na caneca.",
+            "Adicione o ovo e o leite e mexa bem.",
+            "Leve ao microondas por 3 minutos."
+        ]
+    }
+]
