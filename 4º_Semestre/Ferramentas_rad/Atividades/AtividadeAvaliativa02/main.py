@@ -4,7 +4,7 @@ from tkinter import messagebox
 import customtkinter as ctk
 import mysql.connector
 
-# Configuração do Tema
+
 ctk.set_appearance_mode("Light")
 ctk.set_default_color_theme("blue")
 
