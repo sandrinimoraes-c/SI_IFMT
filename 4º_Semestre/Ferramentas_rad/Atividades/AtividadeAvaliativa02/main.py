@@ -8,7 +8,7 @@ import mysql.connector
 ctk.set_appearance_mode("Light")
 ctk.set_default_color_theme("blue")
 
-# ----------------------------- Banco de Dados -----------------------------
+# Banco de Dados
 DB_HOST = "localhost"
 DB_USER = "root"
 DB_PASSWORD = "10111997"
@@ -45,7 +45,7 @@ def conectar_db():
         messagebox.showerror("Erro de Conexão", f"Falha ao conectar ao MySQL:\n{err}")
         return None, None
 
-# ------------------------------ Interface ------------------------------
+# Interface
 class App:
     def __init__(self, root):
         self.root = root
@@ -86,7 +86,7 @@ class App:
         root.bind("<Return>", lambda e: self.entrar())
         self.ent_usuario.focus()
 
-    # ---- Login ----
+    # Login 
     def entrar(self):
         login = self.ent_usuario.get().strip()
         senha = self.ent_senha.get()
@@ -138,7 +138,7 @@ class App:
         btn_voltar = ctk.CTkButton(janela, text="Voltar para o Login", height=38, corner_radius=8, fg_color="#1E293B", hover_color="#0F172A", command=fechar)
         btn_voltar.pack(pady=20, padx=30, fill="x")
 
-    # ---- Redefinir senha ----
+    # Redefinir senha 
     def abrir_redefinicao(self):
         janela = ctk.CTkToplevel(self.root)
         janela.title("Redefinir Senha")
