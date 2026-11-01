@@ -1,24 +1,52 @@
-# Atividade Avaliativa 03 - Sistema de Cadastro de Pets
+Sistema de Gerenciamento de Pets (CRUD)
+Este projeto é uma aplicação desktop com interface gráfica desenvolvida em Python para o cadastro e gerenciamento de pets, incluindo um sistema integrado de autenticação de usuários. A aplicação suporta operações completas de CRUD (Criar, Ler, Atualizar e Deletar) conectadas diretamente a um banco de dados relacional.
 
-Este projeto consiste numa aplicação com interface gráfica desenvolvida em Python para a gestão de pets. Inclui um sistema de autenticação e integração com uma base de dados MySQL, garantindo que cada pet registado fica associado de forma exclusiva ao utilizador que iniciou a sessão.
+Tecnologias Utilizadas
+Linguagem: Python 3.x
 
-**⚠️ Aviso sobre o GitHub Codespaces (Ambientes Cloud)**
-A interface gráfica desta aplicação (baseada na biblioteca `customtkinter`) **não pode ser executada visualmente no GitHub Codespaces**. Por ser um ambiente de terminal hospedado na nuvem, o Codespaces não possui um gestor de ecrã/monitor virtual para processar janelas gráficas (resultando no erro `$DISPLAY`). O ambiente em nuvem deve ser utilizado apenas para edição de código e comandos Git. 
+Interface Gráfica: CustomTkinter (customtkinter)
 
-Para testar a aplicação visualmente, siga as instruções de execução local abaixo.
+Banco de Dados: MySQL / MariaDB (mysql-connector-python)
 
-**Tecnologias Utilizadas**
-* **Python 3:** Lógica principal.
-* **CustomTkinter:** Construção da interface gráfica moderna.
-* **MySQL Server:** Base de dados relacional para armazenamento de utilizadores e pets.
-* **mysql-connector-python:** Comunicação entre a aplicação e a base de dados.
+Ambiente de Desenvolvimento: GitHub Codespaces (com recurso desktop-lite para renderização visual via noVNC)
 
-**Como Executar na Máquina Local (Windows/macOS/Linux Desktop)**
+Como Executar no GitHub Codespaces
+O projeto foi totalmente adaptado para rodar na nuvem, permitindo a exibição de interfaces gráficas diretamente no navegador sem a necessidade de instalações locais.
 
-1. Faça o clone do repositório ou garanta que os seus ficheiros estão sincronizados com um `git pull` no Visual Studio Code local.
-2. Instale as bibliotecas necessárias abrindo o terminal da sua máquina e executando:
-   `pip install customtkinter mysql-connector-python`
-3. Certifique-se de que o serviço MySQL está ativo no seu computador (via XAMPP, WAMP ou instalação nativa).
-4. No ficheiro `main.py`, verifique as credenciais de acesso ao banco de dados na secção `DB_USER` e `DB_PASSWORD`. O sistema criará a base de dados e as tabelas automaticamente na primeira execução.
-5. Inicie o programa no terminal:
-   `python main.py`
+1. Preparar o Banco de Dados
+O sistema requer o MariaDB (ou MySQL) ativo em segundo plano. No terminal do Codespaces, instale e configure as credenciais padrão do projeto (root com a senha 10111997):
+
+Bash
+sudo apt-get update && sudo apt-get install -y mariadb-server
+sudo service mariadb start
+sudo mariadb -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '10111997'; FLUSH PRIVILEGES;"
+2. Configurar o Ambiente Python
+Isole as dependências do projeto criando um ambiente virtual e instalando as bibliotecas exigidas:
+
+Bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install customtkinter mysql-connector-python
+3. Iniciar a Interface Gráfica
+É necessário direcionar a saída de vídeo do Python para o servidor de display virtual do Codespaces antes de rodar o código. Execute:
+
+Bash
+export DISPLAY=:0
+cd 4º_Semestre/Ferramentas_rad/Atividades/AtividadeAvaliativa03
+python3 main.py
+4. Acessar o Aplicativo
+Assim que o programa estiver em execução, verifique a aba Portas (Ports) localizada ao lado do Terminal.
+
+Localize a porta 6080 (Desktop noVNC).
+
+Clique no ícone de globo (ou acesse a notificação pop-up) para abrir essa porta no navegador.
+
+O ambiente de desktop virtual será carregado e a interface do sistema de Pets estará pronta para uso.
+
+Gerenciamento de Dados (Opcional)
+Para visualizar, inserir ou modificar dados diretamente no banco, você pode abrir uma nova aba de terminal (sem fechar a aplicação) e acessar o console do banco:
+
+Bash
+mariadb -u root -p
+# Quando solicitado, digite a senha: 10111997
+Comandos úteis no terminal SQL: USE sistema_login_pets; para selecionar o banco, seguido de SELECT * FROM usuarios; ou SELECT * FROM pets; para inspecionar os registros criados.
