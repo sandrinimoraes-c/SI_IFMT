@@ -1,119 +1,107 @@
-Sistema de Autenticação com Interface Gráfica (Atividade 2)
+# Sistema de Login e Recuperação de Senha com MySQL
 
-Este projeto é uma aplicação desktop desenvolvida em Python que implementa um sistema de controle de acesso (login) e redefinição de senhas. A aplicação possui um recurso de inicialização inteligente: na primeira execução, ela cria automaticamente o banco de dados, as tabelas necessárias e insere um usuário padrão para testes. O sistema pode ser executado localmente no seu computador ou na nuvem através do GitHub Codespaces.
+Segunda atividade avaliativa. Evolução da Atividade 1: o programa continua em Python com **CustomTkinter**, mas agora os usuários são armazenados e consultados em um banco de dados **MySQL**, em vez de um arquivo de texto.
 
-🔑 Credenciais Padrão de Acesso
+---
 
-Ao rodar a aplicação pela primeira vez, o seguinte usuário é criado automaticamente no banco de dados para que você possa testar o sistema:
+## 📱 Especificação das Telas
 
-Usuário: Sandrini
+O sistema é composto por três interfaces integradas:
 
-Senha: 1234
+1. **Tela de Login:**
+   - Campos para entrada de `Usuário` e `Senha`.
+   - Botão **Entrar**: valida as credenciais no banco de dados.
+   - Botão **Sair**: encerra o aplicativo.
+   - Link **Esqueceu sua senha? Redefinir**: abre a janela de redefinição de senha.
+2. **Janela Pós-Login (Área do Sistema):**
+   - Só é acessível mediante autenticação válida.
+   - Exibe o `Usuário` e a `Senha` do usuário logado.
+   - Botão **Voltar para o Login**: retorna à tela inicial com os campos limpos.
+3. **Redefinir Senha:**
+   - Janela que exige `Confirmar Usuário`, `Nova Senha` e `Confirmar Nova Senha`.
+   - Botões **Salvar** e **Cancelar**.
 
-🛠️ Tecnologias Utilizadas
+---
 
-Linguagem: Python 3.x
+## 💾 Regras de Negócio e Armazenamento
 
-Interface Gráfica: CustomTkinter (customtkinter) e Tkinter nativo
+- **Banco de Dados:** MySQL (MariaDB no Codespaces), banco `sistema_login`.
+- **Tabela `usuarios`:** `id` (chave primária, auto incremento), `login` (único, obrigatório) e `senha` (obrigatória).
+- **Criação Automática:** na primeira execução, o programa cria o banco, a tabela e o usuário padrão.
+- **Usuário Padrão:** `Sandrini` / `1234`, inserido quando a tabela está vazia.
+- **Redefinição de Senha:** só é gravada se o usuário existir e as duas senhas digitadas forem iguais.
+- **Consultas Parametrizadas:** os comandos SQL usam `%s`, o que evita injeção de SQL.
+- **Conexão:** configurada nas constantes do início do `main.py`:
 
-Base de Dados (Local): MySQL (mysql-connector-python)
+```python
+DB_HOST = "localhost"
+DB_USER = "root"
+DB_PASSWORD = "..."   # senha do seu MySQL/MariaDB
+DB_NAME = "sistema_login"
+```
 
-Base de Dados (Nuvem): MariaDB (mysql-connector-python)
+---
 
-Ambientes: VS Code (Local) / GitHub Codespaces (com renderização desktop-lite via noVNC)
+## 🚀 Pré-requisitos e Como Executar
 
-💻 Opção 1: Como Executar Localmente (VS Code)
+### 1. Instalar Dependências
+Recomenda-se usar um ambiente virtual:
 
-Utilize esta opção se estiver rodando o projeto diretamente no seu computador. Certifique-se de ter o Python e o MySQL Server instalados.
-
-1. Configurar o Banco de Dados (MySQL)
-
-Garanta que o serviço MySQL está ativo na sua máquina. A aplicação utiliza o usuário root com a senha 10111997. O banco de dados sistema_login será criado automaticamente pelo próprio código Python.
-
-2. Preparar o Ambiente Python
-
-Abra o terminal integrado do VS Code na raiz do projeto e crie um ambiente virtual:
-
-# 1. Criar o ambiente virtual
-python -m venv .venv
-
-# 2. Ativar o ambiente virtual
-# No Windows:
-.venv\Scripts\activate
-# No Linux/Mac:
-source .venv/bin/activate
-
-# 3. Instalar as bibliotecas necessárias
+```bash
+python3 -m venv .venv
+source .venv/bin/activate        # Windows: .venv\Scripts\activate
 pip install customtkinter mysql-connector-python
+```
 
+### 2. Preparar o Banco de Dados
 
-3. Iniciar a Aplicação
+**Localmente:** mantenha o MySQL Server em execução e confira se `DB_PASSWORD` no `main.py` é a senha do seu usuário `root`.
 
-Navegue até a pasta onde o arquivo da Atividade 2 está salvo e execute o código:
+**No GitHub Codespaces (MariaDB):**
 
-# Substitua 'nome_do_arquivo.py' pelo nome correto do seu script Python
-python nome_do_arquivo.py
-
-
-☁️ Opção 2: Como Executar no GitHub Codespaces (Nuvem)
-
-Utilize esta opção se estiver utilizando o ambiente de desenvolvimento online do GitHub. A interface gráfica será processada em um servidor de tela virtual e exibida no seu navegador.
-
-1. Iniciar o Banco de Dados (MariaDB)
-
-O Codespaces utiliza o MariaDB, que é compatível com o código. No terminal, inicie o serviço e configure a senha do servidor:
-
-# Instalar o servidor (apenas se for a primeira vez criando o Codespace)
+```bash
+# apenas na primeira vez
 sudo apt-get update && sudo apt-get install -y mariadb-server
 
-# Ligar o serviço (necessário sempre que o Codespace for reiniciado)
+# sempre que o Codespace for reiniciado
 sudo service mariadb start
 
-# Configurar a senha do servidor MySQL/MariaDB para o projeto
-sudo mariadb -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '10111997'; FLUSH PRIVILEGES;"
+# use a mesma senha definida em DB_PASSWORD
+sudo mariadb -e "ALTER USER 'root'@'localhost' IDENTIFIED BY 'SUA_SENHA'; FLUSH PRIVILEGES;"
+```
 
+### 3. Suporte de Sistema (Linux e Codespaces)
+Em distribuições Debian/Ubuntu, instale o Tkinter caso o sistema acuse falta de display gráfico:
 
-2. Preparar o Ambiente Python
+```bash
+sudo apt install python3-tk
+```
 
-Crie e ative o ambiente virtual no terminal do Codespaces:
+No Codespaces, o arquivo `.devcontainer/devcontainer.json` (na raiz do repositório) cria o desktop virtual e já instala o `python3-tk`. Se o Codespace foi criado antes desse arquivo, reconstrua-o com `Ctrl+Shift+P` → **Codespaces: Full Rebuild Container**.
 
-python3 -m venv .venv
-source .venv/bin/activate
-pip install customtkinter mysql-connector-python
+### 4. Executando o Projeto
+Com o terminal aberto na pasta do arquivo, rode:
 
+```bash
+python3 main.py
+```
 
-3. Configurar a Tela e Iniciar a Aplicação
+### 5. Acessando a Interface no Codespaces
+1. Abra a aba **Ports** (ao lado do Terminal).
+2. Na porta **6080**, clique no ícone de globo.
+3. Clique em **Connect** e informe a senha `vscode`.
 
-Direcione a saída gráfica do Python para o monitor virtual do Codespaces (DISPLAY=:0) e execute o código:
+A tela de login aparece no navegador.
 
-export DISPLAY=:0
-# Substitua 'nome_do_arquivo.py' pelo nome correto do script
-python3 nome_do_arquivo.py
+---
 
+## 🔎 Conferindo os Dados (opcional)
 
-4. Acessar a Interface Gráfica no Navegador
+```bash
+mariadb -u root -p        # no computador local: mysql -u root -p
+```
 
-Com o programa em execução no terminal, clique na aba Portas (Ports) ao lado do Terminal.
-
-Identifique a porta 6080 (Desktop noVNC).
-
-Clique no ícone de globo para abrir a porta no navegador. A tela de login aparecerá pronta para uso.
-
-🗄️ Gestão de Dados (Opcional)
-
-Você pode verificar se a tabela e o usuário padrão foram criados corretamente abrindo uma nova aba de terminal e acessando o banco de dados:
-
-# Entrar no console do banco de dados (use mariadb ou mysql)
-mariadb -u root -p
-# Digite a senha quando solicitada: 10111997
-
-
-Comandos SQL úteis no console:
-
-SHOW DATABASES; (Verifique se sistema_login aparece na lista)
-
-USE sistema_login; (Seleciona o banco criado pela aplicação)
-
-SELECT * FROM usuarios; (Exibe os logins e senhas registrados no sistema)
-
-exit (Sai do banco de dados e retorna ao terminal)
+```sql
+USE sistema_login;
+SELECT * FROM usuarios;
+```

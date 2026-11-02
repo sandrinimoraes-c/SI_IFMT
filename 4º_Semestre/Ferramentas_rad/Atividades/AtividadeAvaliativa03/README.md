@@ -1,117 +1,116 @@
-Sistema de Gestão de Pets (CRUD) - Atividade 3
+# Sistema de Cadastro de Pets
 
-Este projeto é uma aplicação desktop com interface gráfica desenvolvida em Python para o registo e gestão de pets, incluindo um sistema integrado de autenticação de utilizadores. A aplicação suporta operações completas de CRUD (Criar, Ler, Atualizar e Apagar) e está configurada para funcionar em dois ambientes distintos: localmente no seu computador ou na nuvem através do GitHub Codespaces.
+Terceira atividade avaliativa. Programa desenvolvido em Python com **CustomTkinter** e banco de dados **MySQL**, que registra os pets que a pessoa tem ou já teve. Reaproveita o login das atividades anteriores: cada usuário acessa e cadastra **apenas os seus próprios pets**.
 
-🛠️ Tecnologias Utilizadas
+---
 
-Linguagem: Python 3.x
+## 📱 Especificação das Telas
 
-Interface Gráfica: CustomTkinter (customtkinter)
+O sistema é composto por quatro interfaces integradas:
 
-Base de Dados (Local): MySQL (mysql-connector-python)
+1. **Tela de Login:**
+   - Campos para entrada de `Usuário` e `Senha`.
+   - Botão **Entrar**: valida as credenciais no banco de dados.
+   - Botão **Sair**: encerra o aplicativo.
+   - Link **Esqueceu a senha? Redefinir**: abre a janela de redefinição de senha.
+   - Link **Novo por aqui? Cadastre-se**: abre a janela de cadastro de usuário.
+2. **Cadastrar Usuário:**
+   - Campos `Novo Login`, `Senha` e `Confirmar Senha`.
+   - Não permite login repetido nem senhas diferentes.
+3. **Redefinir Senha:**
+   - Campos `Usuário`, `Senha Atual` e `Nova Senha`.
+   - Só altera a senha se o usuário e a senha atual estiverem corretos.
+4. **Cadastro de Pets (janela pós-login):**
+   - Formulário com `Nome`, `Espécie` (Cachorro, Gato, Pássaro ou Outro), `Sexo` (Macho ou Fêmea), `Idade`, `Raça`, `Peso`, `Cor` e `Status` (Vivo ou Morto).
+   - Botão **Salvar Pet**: grava o pet no banco e atualiza a lista.
+   - Lista com os pets do usuário logado.
+   - Botão **Sair da Conta**: volta para a tela de login.
 
-Base de Dados (Nuvem): MariaDB (mysql-connector-python)
+---
 
-Ambientes: VS Code (Local) / GitHub Codespaces (com renderização desktop-lite via noVNC)
+## 💾 Regras de Negócio e Armazenamento
 
-💻 Opção 1: Como Executar Localmente (VS Code)
+- **Banco de Dados:** MySQL (MariaDB no Codespaces), banco `sistema_login_pets`.
+- **Tabela `usuarios`:** `id` (chave primária, auto incremento), `login` (único, obrigatório) e `senha` (obrigatória).
+- **Tabela `pets`:** `id`, `usuario_id` (chave estrangeira para `usuarios.id`), `nome`, `especie`, `sexo`, `idade`, `raca`, `peso`, `cor` e `status_vida`, todos obrigatórios.
+- **Um Usuário por Vez:** a lista de pets é filtrada por `usuario_id`, então cada usuário vê somente os seus pets.
+- **Exclusão em Cascata:** ao apagar um usuário do banco, seus pets também são apagados.
+- **Criação Automática:** na primeira execução, o programa cria o banco, as tabelas e o usuário padrão.
+- **Usuário Padrão:** `Sandrini` / `1234`, inserido quando a tabela de usuários está vazia.
+- **Funções Disponíveis:** cadastrar e listar pets. Esta versão não possui edição nem exclusão de pets.
+- **Conexão:** configurada nas constantes do início do `main.py`:
 
-Utilize esta opção se estiver a correr o projeto diretamente no seu computador. Certifique-se de que tem o Python e o MySQL Server instalados.
+```python
+DB_HOST = "localhost"
+DB_USER = "root"
+DB_PASSWORD = "..."   # senha do seu MySQL/MariaDB
+DB_NAME = "sistema_login_pets"
+```
 
-1. Configurar a Base de Dados (MySQL)
+---
 
-Garanta que o serviço MySQL está ativo na sua máquina. A aplicação espera um utilizador root com a palavra-passe 10111997. Se a sua configuração local for diferente, altere as credenciais no ficheiro de ligação à base de dados do projeto.
+## 🚀 Pré-requisitos e Como Executar
 
-2. Preparar o Ambiente Python
+### 1. Instalar Dependências
+Recomenda-se usar um ambiente virtual:
 
-Abra o terminal integrado do VS Code na raiz do projeto e isole as dependências criando um ambiente virtual:
-
-# 1. Criar o ambiente virtual
-python -m venv .venv
-
-# 2. Ativar o ambiente virtual
-# No Windows:
-.venv\Scripts\activate
-# No Linux/Mac:
-source .venv/bin/activate
-
-# 3. Instalar as bibliotecas necessárias
+```bash
+python3 -m venv .venv
+source .venv/bin/activate        # Windows: .venv\Scripts\activate
 pip install customtkinter mysql-connector-python
+```
 
+### 2. Preparar o Banco de Dados
 
-3. Iniciar a Aplicação
+**Localmente:** mantenha o MySQL Server em execução e confira se `DB_PASSWORD` no `main.py` é a senha do seu usuário `root`.
 
-Navegue até à pasta do ficheiro principal e execute o código. A janela do programa abrir-se-á nativamente no seu sistema:
+**No GitHub Codespaces (MariaDB):**
 
-cd 4º_Semestre/Ferramentas_rad/Atividades/AtividadeAvaliativa03
-python main.py
-
-
-☁️ Opção 2: Como Executar no GitHub Codespaces (Nuvem)
-
-Utilize esta opção se estiver a utilizar o ambiente de desenvolvimento online do GitHub. A interface gráfica será processada num servidor de ecrã virtual e exibida no seu navegador.
-
-1. Iniciar a Base de Dados (MariaDB)
-
-O Codespaces utiliza o MariaDB, que é totalmente compatível com o código MySQL da aplicação. No terminal, inicie o serviço e configure a palavra-passe:
-
-# Instalar o servidor (apenas se for a primeira vez que cria o Codespace)
+```bash
+# apenas na primeira vez
 sudo apt-get update && sudo apt-get install -y mariadb-server
 
-# Ligar o serviço (necessário sempre que o Codespace for reiniciado)
+# sempre que o Codespace for reiniciado
 sudo service mariadb start
 
-# Configurar a palavra-passe do projeto
-sudo mariadb -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '10111997'; FLUSH PRIVILEGES;"
+# use a mesma senha definida em DB_PASSWORD
+sudo mariadb -e "ALTER USER 'root'@'localhost' IDENTIFIED BY 'SUA_SENHA'; FLUSH PRIVILEGES;"
+```
 
+### 3. Suporte de Sistema (Linux e Codespaces)
+Em distribuições Debian/Ubuntu, instale o Tkinter caso o sistema acuse falta de display gráfico:
 
-2. Preparar o Ambiente Python
+```bash
+sudo apt install python3-tk
+```
 
-Crie e ative o ambiente virtual no terminal do Codespaces:
+No Codespaces, o arquivo `.devcontainer/devcontainer.json` (na raiz do repositório) cria o desktop virtual e já instala o `python3-tk`. Se o Codespace foi criado antes desse arquivo, reconstrua-o com `Ctrl+Shift+P` → **Codespaces: Full Rebuild Container**.
 
-python3 -m venv .venv
-source .venv/bin/activate
-pip install customtkinter mysql-connector-python
+### 4. Executando o Projeto
+Com o terminal aberto na pasta do arquivo, rode:
 
-
-3. Configurar o Ecrã e Iniciar a Aplicação
-
-Direcione a saída gráfica do Python para o monitor virtual do Codespaces (DISPLAY=:0) e execute o código:
-
-export DISPLAY=:0
-cd 4º_Semestre/Ferramentas_rad/Atividades/AtividadeAvaliativa03
+```bash
 python3 main.py
+```
 
+### 5. Acessando a Interface no Codespaces
+1. Abra a aba **Ports** (ao lado do Terminal).
+2. Na porta **6080**, clique no ícone de globo.
+3. Clique em **Connect** e informe a senha `vscode`.
 
-4. Aceder à Interface Gráfica no Navegador
+A tela de login aparece no navegador.
 
-Com o programa em execução no terminal, procure o separador Portas (Ports) ao lado do Terminal.
+---
 
-Identifique a porta 6080 (Desktop noVNC).
+## 🔎 Conferindo os Dados (opcional)
 
-Clique no ícone de globo para abrir a porta no navegador. A interface do sistema de Pets aparecerá pronta a ser utilizada.
+```bash
+mariadb -u root -p        # no computador local: mysql -u root -p
+```
 
-🗄️ Gestão de Dados (Opcional)
-
-Seja no ambiente local (MySQL) ou no Codespaces (MariaDB), pode interagir diretamente com a base de dados via terminal para validar os registos. Abra um novo separador de terminal e execute:
-
-# Entrar na consola da base de dados
-mysql -u root -p
-# (Ou 'mariadb -u root -p' no Codespaces)
-# Digite a palavra-passe quando solicitada: 10111997
-
-
-Comandos SQL úteis na consola:
-
-SHOW DATABASES; (Lista as bases de dados)
-
-USE sistema_login_pets; (Seleciona a base de dados do projeto)
-
-SHOW TABLES; (Lista as tabelas disponíveis)
-
-SELECT * FROM usuarios; (Exibe todos os utilizadores registados)
-
-SELECT * FROM pets; (Exibe todos os pets registados)
-
-exit (Sai da consola e regressa ao terminal)
+```sql
+USE sistema_login_pets;
+SELECT * FROM usuarios;
+SELECT * FROM pets;
+```
 
