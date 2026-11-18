@@ -28,6 +28,16 @@ app.post("/alunos", (req, res) => {
   res.status(201).json(novoAluno);
 });
 
+app.delete("/alunos/:id", (req, res) => {
+  const id = Number(req.params.id);
+  const existe = alunos.some((item) => item.id === id);
+  if (!existe) 
+    return res.status(404).send("Aluno não encontrado.");
+
+  alunos = alunos.filter((item) => item.id !== id);
+  res.status(204).send("Aluno removido com sucesso.");
+});
+
 app.listen(3000, () => {
   console.log("Servidor rodando em http://localhost:3000");
 });

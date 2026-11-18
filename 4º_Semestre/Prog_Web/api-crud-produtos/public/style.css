@@ -1,0 +1,197 @@
+:root {
+  --fundo: #f3f5f7;
+  --painel: #ffffff;
+  --texto: #1f2933;
+  --suave: #5f6c7b;
+  --borda: #d5dbe1;
+  --destaque: #0b6e4f;
+  --perigo: #b42318;
+  --erro-fundo: #fde8e6;
+  --ok-fundo: #e1f4ec;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: var(--fundo);
+  color: var(--texto);
+  line-height: 1.5;
+}
+
+header,
+footer {
+  padding: 1.5rem 1rem;
+  text-align: center;
+}
+
+header h1 {
+  margin: 0 0 0.25rem;
+}
+
+header p,
+footer p {
+  margin: 0;
+  color: var(--suave);
+}
+
+main,
+.conteudo {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+main {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.painel {
+  background: var(--painel);
+  border: 1px solid var(--borda);
+  border-radius: 8px;
+  padding: 1.25rem;
+}
+
+.painel h2 {
+  margin-top: 0;
+}
+
+#mensagem {
+  margin: 0;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  font-weight: 600;
+}
+
+#mensagem.erro {
+  background: var(--erro-fundo);
+  color: var(--perigo);
+}
+
+#mensagem.sucesso {
+  background: var(--ok-fundo);
+  color: var(--destaque);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+label {
+  font-weight: 600;
+  margin-top: 0.5rem;
+}
+
+input[type="text"],
+input[type="number"] {
+  padding: 0.6rem;
+  border: 1px solid var(--borda);
+  border-radius: 6px;
+  font: inherit;
+}
+
+input:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--destaque);
+  outline-offset: 2px;
+}
+
+.acoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+button {
+  padding: 0.6rem 1rem;
+  border: none;
+  border-radius: 6px;
+  background: var(--destaque);
+  color: #ffffff;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+button:hover {
+  filter: brightness(1.1);
+}
+
+button.secundario {
+  background: #e4e8ec;
+  color: var(--texto);
+}
+
+button.perigo {
+  background: var(--perigo);
+}
+
+#lista-produtos {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+#lista-produtos li {
+  border: 1px solid var(--borda);
+  border-radius: 8px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.produto-nome {
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.produto-info {
+  color: var(--suave);
+  margin: 0;
+}
+
+.produto-preco {
+  font-weight: 700;
+  color: var(--destaque);
+  margin: 0;
+}
+
+.vazio {
+  color: var(--suave);
+}
+
+footer {
+  margin-top: 1.5rem;
+}
+
+@media (min-width: 700px) {
+  .conteudo {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .painel:first-of-type {
+    flex: 1;
+  }
+
+  .painel:last-of-type {
+    flex: 2;
+  }
+
+  #lista-produtos {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
